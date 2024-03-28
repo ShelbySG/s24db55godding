@@ -1,5 +1,33 @@
 extends layout
 
 block content
-  h1= title
+  h1=title
+
+  p #{query.rows} #{query.cols}
+
+  -  var rows = Number(query.rows) 
+  -  var cols = Number(query.cols)
+
+  function min(num1, num2){
+    return Math.min(num1, num2)
+  }
+
+  if (!Number.isInteger(rows) || !Number.isInteger(cols))
+    p error row or cols not an int 
   
+  else if (rows>13 || rows<3)
+    p error rows is too big or too small 
+
+  else if (cols>13 || cols<3)
+    p error cols is too big or small 
+  
+  else 
+    table#outer 
+      -  for(leti=0; i<rows; i++){
+           tr#middle 
+             - for(let j=0; j<cols; j++){
+               td=Min(i,j)
+             - }
+
+      - }
+   -
