@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+ 
+  - var image_names = ["eb1.jpg", "eb2.jpg", "eb3.png", "eb4.jpg", "eb5.jpg"]
+
+  - for(var i=0; i<3; i++)
+      -  var rand = Math.floor(Math.random()*5)
+      img(src=image_names[rand], alt="easter basket", height="200", width="200")
+      
