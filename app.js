@@ -3,12 +3,29 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var easterBasket = require("./models/easterBasket");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var EasterBasketRouter = require('./routes/easterbasket');
-var gridRouter = require('./routes/grid');
-var pickRouter = require('./routes/pick');
+require('dotenv').config();
+const connectionString = process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString);
+
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once("open", function(){
+console.log("Connection to DB succeeded")});
+
+
+
+  let reseed = true;
+  if (reseed) {recreateDB();}
+  var indexRouter = require('./routes/index');
+  var usersRouter = require('./routes/users');
+  var EasterBasketRouter = require('./routes/easterbasket');
+  var gridRouter = require('./routes/grid');
+  var pickRouter = require('./routes/pick');
+  var resourceRouter = require('./routes/resource');
 
 var app = express();
 
@@ -27,11 +44,45 @@ app.use('/users', usersRouter);
 app.use('/easterBasket', EasterBasketRouter);
 app.use('/grid', gridRouter);
 app.use('/pick', pickRouter);
+app.use('/easterbasketSchema', easterBasket);
+app.use('/resource', resourceRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+// We can seed the collection if needed on
+
+async function recreateDB(){
+  // Delete everything
+  await easterBasket.deleteMany();
+
+  let eb1 = new
+  easterBasket({color:"blue", cost:15.4, full:'true'});
+  eb1.save().then(doc=>{
+  console.log("First object saved")}
+  ).catch(err=>{
+  console.error(err)
+  });
+  
+  let eb2 = new
+  easterBasket({color:"pink", cost:10, full:'false'});
+  eb2.save().then(doc=>{
+  console.log("Second object saved")}
+  ).catch(err=>{
+  console.error(err)
+  });
+  
+  let eb3 = new
+  easterBasket({color:"green", cost:25, full:'true'});
+  eb3.save().then(doc=>{
+  console.log("Second object saved")}
+  ).catch(err=>{
+  console.error(err)
+  });
+  
+  }
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -45,3 +96,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+
