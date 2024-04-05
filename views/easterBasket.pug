@@ -2,18 +2,12 @@ extends layout
 
 block content
   h1= title
- 
 
-  -  var easterBasket1 = {color: 'blue', full: 'true', cost: '20'}
-  -  var easterBasket2 = {color: 'pink', full: 'false', cost: '10'}
-  -  var easterBasket3 = {color: 'green', full: 'true', cost: '25'}
-
-  - var results = [easterBasket1, easterBasket2, easterBasket3]
-
+  - let items = results
 
   div(class="container-fluid")
     div(class="row")  
-      each item in results 
+      each item in items
         div(class="col-sm-2")
           #{item.color} #{item.full} #{item.cost} #{item.color}
 
