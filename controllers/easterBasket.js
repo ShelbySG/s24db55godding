@@ -1,7 +1,8 @@
 var easterBasket = require('../models/easterBasket');
 
 // GET request for one costume.
-router.get('/costumes/:id', costume_controller.costume_detail);
+router.get('/easterBasket/:id', costume_controller.costume_detail);
+
 // for a specific Costume.
 exports.costume_detail = async function(req, res) {
 console.log("detail" + req.params.id)
