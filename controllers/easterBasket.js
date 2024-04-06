@@ -1,19 +1,21 @@
 var easterBasket = require('../models/easterBasket');
 
-// GET request for one costume.
-router.get('/easterBasket/:id', costume_controller.costume_detail);
+
+
 
 // for a specific Costume.
 exports.costume_detail = async function(req, res) {
+  
 console.log("detail" + req.params.id)
 try {
-result = await Costume.findById( req.params.id)
+const result = await easterBasket.findById( req.params.id)
 res.send(result)
 } catch (error) {
 res.status(500)
 res.send(`{"error": document for id ${req.params.id} not found`);
 }
 };
+
 
 // List of all Costumes
 exports.easterBasket_list = async function(req, res) {
@@ -90,6 +92,27 @@ res.send(result);
 catch(err){
 res.status(500);
 res.send(`{"error": ${err}}`);
+}
+};
+
+//Handle Costume update form on PUT.
+exports.easterBasket_update_put = async function(req, res) {
+console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+try {
+let toUpdate = await easterBasket.findById( req.params.id)
+// Do updates of properties
+if(req.body.color)
+toUpdate.color = req.body.color;
+if(req.body.cost) toUpdate.cost = req.body.cost;
+if(req.body.full) toUpdate.full = req.body.full;
+let result = await toUpdate.save();
+console.log("Sucess " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
 }
 };
 

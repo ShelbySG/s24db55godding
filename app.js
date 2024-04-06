@@ -5,8 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var easterBasket = require("./models/easterBasket");
 
-// GET request for one costume.
-//router.get('/easterBasket/:id', costume_controller.costume_detail);
+
 
 
 require('dotenv').config();
@@ -30,7 +29,7 @@ console.log("Connection to DB succeeded")});
   var gridRouter = require('./routes/grid');
   var pickRouter = require('./routes/pick');
   var resourceRouter = require('./routes/resource');
-  var controlRouter = require('./controllers/easterBasket');
+  //var controlRouter = require('./controllers/easterBasket');
 
 var app = express();
 
@@ -51,7 +50,7 @@ app.use('/grid', gridRouter);
 app.use('/pick', pickRouter);
 app.use('/easterbasketSchema', easterBasket);
 app.use('/resource', resourceRouter)
-app.use('/controllers', controlRouter)
+//app.use('/controllers', controlRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
