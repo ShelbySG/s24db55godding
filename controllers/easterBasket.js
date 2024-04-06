@@ -13,9 +13,23 @@ exports.easterBasket_list = async function(req, res) {
     };
 
 // for a specific Costume.
-exports.easterBasket_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: Costume detail: ' + req.params.id);
-};
+//exports.easterBasket_detail = function(req, res) {
+//res.send('NOT IMPLEMENTED: Costume detail: ' + req.params.id);
+//};
+exports.easterBasket_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await easterBasket.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+    };
+
+
+
+
 // Handle Costume create on POST.
 // exports.easterBasket_create_post = function(req, res) {
 // res.send('NOT IMPLEMENTED: Costume create POST');
