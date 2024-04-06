@@ -6,7 +6,7 @@ var logger = require('morgan');
 var easterBasket = require("./models/easterBasket");
 
 // GET request for one costume.
-router.get('/easterBasket/:id', costume_controller.costume_detail);
+//router.get('/easterBasket/:id', costume_controller.costume_detail);
 
 
 require('dotenv').config();
