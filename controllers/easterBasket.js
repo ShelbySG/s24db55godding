@@ -1,4 +1,19 @@
 var easterBasket = require('../models/easterBasket');
+
+// GET request for one costume.
+router.get('/costumes/:id', costume_controller.costume_detail);
+// for a specific Costume.
+exports.costume_detail = async function(req, res) {
+console.log("detail" + req.params.id)
+try {
+result = await Costume.findById( req.params.id)
+res.send(result)
+} catch (error) {
+res.status(500)
+res.send(`{"error": document for id ${req.params.id} not found`);
+}
+};
+
 // List of all Costumes
 exports.easterBasket_list = async function(req, res) {
 
@@ -25,8 +40,8 @@ exports.easterBasket_detail = async function(req, res) {
     res.status(500)
     res.send(`{"error": document for id ${req.params.id} not found`);
     }
-    };
-
+    
+};
 
 
 
