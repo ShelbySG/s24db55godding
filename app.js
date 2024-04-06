@@ -30,6 +30,7 @@ console.log("Connection to DB succeeded")});
   var gridRouter = require('./routes/grid');
   var pickRouter = require('./routes/pick');
   var resourceRouter = require('./routes/resource');
+  var controlRouter = require('./controllers/easterBasket');
 
 var app = express();
 
@@ -50,6 +51,7 @@ app.use('/grid', gridRouter);
 app.use('/pick', pickRouter);
 app.use('/easterbasketSchema', easterBasket);
 app.use('/resource', resourceRouter)
+app.use('/controllers', controlRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
