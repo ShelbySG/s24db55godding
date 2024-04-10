@@ -8,7 +8,8 @@ var easterBasket_controller = require('../controllers/easterBasket');
 // });
 
 router.get('/', easterBasket_controller.easterBasket_view_all_Page );
-
+/* GET detail costume page */
+router.get('/detail', easterBasket_controller.easterBasket_view_one_Page);
 module.exports = router;
 
 

@@ -3,18 +3,18 @@ var easterBasket = require('../models/easterBasket');
 
 
 
-// for a specific Costume.
-exports.costume_detail = async function(req, res) {
+// // for a specific Costume.
+// exports.costume_detail = async function(req, res) {
   
-console.log("detail" + req.params.id)
-try {
-const result = await easterBasket.findById( req.params.id)
-res.send(result)
-} catch (error) {
-res.status(500)
-res.send(`{"error": document for id ${req.params.id} not found`);
-}
-};
+// console.log("detail" + req.params.id)
+// try {
+// const result = await easterBasket.findById( req.params.id)
+// res.send(result)
+// } catch (error) {
+// res.status(500)
+// res.send(`{"error": document for id ${req.params.id} not found`);
+// }
+// };
 
 
 // List of all Costumes
@@ -53,9 +53,9 @@ exports.easterBasket_detail = async function(req, res) {
 // res.send('NOT IMPLEMENTED: Costume create POST');
 // };
 // Handle Costume delete from on DELETE.
-exports.easterBasket_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: Costume delete DELETE ' + req.params.id);
-};
+//exports.easterBasket_delete = function(req, res) {
+//res.send('NOT IMPLEMENTED: Costume delete DELETE ' + req.params.id);
+//};
 // Handle Costume update form on PUT.
 exports.easterBasket_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: Costume update PUT' + req.params.id);
@@ -116,3 +116,30 @@ failed`);
 }
 };
 
+// Handle a show one view with id specified by query
+exports.easterBasket_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await easterBasket.findById( req.query.id)
+    res.render('easterBasketdetail',
+    { title: 'Costume Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
+
+
+   // Handle Costume delete on DELETE.
+exports.easterBasket_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+        result = await easterBasket.findByIdAndDelete( req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+        } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+        }
+};
