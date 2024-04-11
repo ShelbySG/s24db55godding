@@ -16,8 +16,8 @@ router.get('/create', easterBasket_controller.easterBasket_create_Page)
 /* GET create update page */
 router.get('/update', easterBasket_controller.easterBasket_update_Page);
 
-
-
+/* GET delete costume page */
+router.get('/delete', easterBasket_controller.easterBasket_delete_Page);
 
 
 module.exports = router;

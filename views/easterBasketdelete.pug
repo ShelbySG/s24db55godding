@@ -1,0 +1,51 @@
+extends layout
+
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let easterBasketid = toShow._id
+    - let easterBasketcolor = toShow.color
+    - let easterBasketcost = toShow.cost
+    - let easterBasketfull = toShow.full
+    - let actionid = "/resource/easterBasket/" + easterBasketid
+    script.
+      let actionid = "#{actionid}"
+    div
+      div.row
+        div(class='easterBasketAttr mr-3') Easter basket ID is:
+        div #{easterBasketid}
+      div.row
+        div(class='easterBasketAttr mr-3') Easter basket color is:
+        div #{easterBasketcolor}
+      div.row
+        div(class='easterBasketAttr mr-3') Easter basket full ? :
+        div #{easterBasketfull}
+      div.row
+        div(class='easterBasketAttr mr-3') Easter basket cost is:
+        div #{easterBasketcost}
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+    script.
+      function cancel() {
+        // Go back to the home page for the costume collection
+        window.location.href='/costumes'
+      }
+    script.
+      function deleteOnid() {
+        console.log("starting delete")
+        // delete first
+        fetch(actionid, {
+          method: 'DELETE' 
+        }).then((resp) => {
+          return resp.text(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Delete succeeded")
+          window.location.href='/easterBasket'
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Delete failed " + error )
+        });
+      }

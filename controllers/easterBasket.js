@@ -143,5 +143,19 @@ exports.easterBasket_create_Page = function(req, res) {
     };
     
 
-
+    // Handle a delete one view with id from query
+    exports.easterBasket_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await easterBasket.findById(req.query.id)
+    res.render('easterBasketdelete', { title: 'Costume Delete', toShow:
+    result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
+    
+    
     
