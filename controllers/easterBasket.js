@@ -129,6 +129,11 @@ exports.easterBasket_create_Page = function(req, res) {
     console.log("update view for item "+req.query.id)
     try{
     let result = await easterBasket.findById(req.query.id)
+
+    if (!result) {
+        return res.status(404).send('Easter basket not found '+result);
+            }
+    
     res.render('easterBasketupdate', { title: 'Costume Update', toShow: result });
     }
     catch(err){
@@ -138,3 +143,5 @@ exports.easterBasket_create_Page = function(req, res) {
     };
     
 
+
+    
