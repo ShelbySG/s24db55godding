@@ -112,10 +112,10 @@ exports.easterBasket_delete = async function(req, res) {
 // Handle building the view for creating a costume.
 // No body, no in path parameter, no query.
 // Does not need to be async
-exports.costume_create_Page = function(req, res) {
+exports.easterBasket_create_Page = function(req, res) {
     console.log("create view")
     try{
-    res.render('costumecreate', { title: 'Costume Create'});
+    res.render('easterBasketcreate', { title: 'Costume Create'});
     }
     catch(err){
     res.status(500)
@@ -123,3 +123,18 @@ exports.costume_create_Page = function(req, res) {
     }
     };
     
+    // Handle building the view for updating a costume.
+    // query provides the id
+    exports.easterBasket_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await easterBasket.findById(req.query.id)
+    res.render('easterBasketupdate', { title: 'Costume Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
+    
+

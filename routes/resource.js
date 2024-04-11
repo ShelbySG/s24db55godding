@@ -17,8 +17,7 @@ router.put('/easterBasketUpdate/:id', costume_controller.easterBasket_update_put
 router.get('/easterBasket/:id', costume_controller.easterBasket_detail);
 // GET request for list of all Costume items.
 router.get('/easterBasket', costume_controller.easterBasket_list);
-/* GET create costume page */
-router.get('/create', costume_controller.easterBasket_create_Page)
+
 
 
 
