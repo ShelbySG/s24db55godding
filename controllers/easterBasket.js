@@ -1,8 +1,6 @@
 var easterBasket = require('../models/easterBasket');
 
 
-
-
 // List of all Costumes
 exports.easterBasket_list = async function(req, res) {
 
