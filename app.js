@@ -8,6 +8,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require("express-session");
 var app = express();
+
 app.use(require('express-session')({
   secret: 'keyboard cat',
   resave: false,
@@ -35,6 +36,9 @@ passport.use(new LocalStrategy(
   })
   })
   )
+
+
+
 
   
 var easterBasket = require("./models/easterBasket");
