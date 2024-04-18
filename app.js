@@ -2,13 +2,12 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-
 var logger = require('morgan');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require("express-session");
+var easterBasket = require("./models/easterBasket");
 var app = express();
-
 app.use(require('express-session')({
   secret: 'keyboard cat',
   resave: false,
@@ -16,7 +15,7 @@ app.use(require('express-session')({
   }));
   app.use(passport.initialize());
   app.use(passport.session());
-  
+
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -36,14 +35,6 @@ passport.use(new LocalStrategy(
   })
   })
   )
-
-
-
-
-  
-var easterBasket = require("./models/easterBasket");
-
-
 
 
 require('dotenv').config();
@@ -95,7 +86,7 @@ async function recreateDB(){
   await easterBasket.deleteMany();
 
   let eb1 = new
-  easterBasket({color:"blue", cost:15.4, full:'true'});
+  easterBasket({color:"blue", cost:15, full:'true'});
   eb1.save().then(doc=>{
   console.log("First object saved")}
   ).catch(err=>{

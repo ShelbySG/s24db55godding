@@ -7,30 +7,13 @@ var easterBasket_controller = require('../controllers/easterBasket');
 //   res.render('easterBasket', { title: 'Search results Easter Basket' });
 // });
 
+
+    
 router.get('/', easterBasket_controller.easterBasket_view_all_Page );
 /* GET detail costume page */
 router.get('/detail', easterBasket_controller.easterBasket_view_one_Page);
 /* GET create costume page */
 router.get('/create', easterBasket_controller.easterBasket_create_Page)
-
-/* GET create update page */
-// A little function to check if we have an authorized user and continue on
-
-// redirect to login.
-const secured = (req, res, next) => {
-if (req.user){
-return next();
-}
-res.redirect("/login");
-}
-
-router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
-    }); 
-router.get('/update', secured, easterBasket_controller.easterBasket_update_Page);
-
-/* GET delete costume page */
-router.get('/delete', easterBasket_controller.easterBasket_delete_Page);
-
+router.get('/update', easterBasket_controller.easterBasket_update_Page)
 
 module.exports = router;

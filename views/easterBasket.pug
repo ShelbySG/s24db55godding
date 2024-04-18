@@ -4,13 +4,21 @@ block content
   h1= title
 
   - let items = results
+  - let createdest = `dispatch(\"/easterBasket/create\")`
+  
 
   div(class="container-fluid")
     div(class="row m-1")  
       each item in items
         - let destination = `dispatch(\"/easterBasket/update?id=${item._id}\")`
-        div(class="row-sm-2", class="m-1") Easter basket #{item.costume_type}(#{item.size}) is #{item.cost}
+        - let detaildest =`dispatch(\"/easterBasket/detail\")`
+        - let deletedest = `dispatch(\"/easterBasket/delete\")`
+        div(class="row-sm-2", class="m-1") Easter basket #{item.color} and #{item.full} is #{item.cost}
           button.btn( class="btn-primary ml-1", onclick= destination) Update
+          button.btn( class="btn-primary ml-1", onclick= detaildest) Detail
+          button.btn( class="btn-primary ml-1", onclick= deletedest) Delete
+      button.btn( class="btn-primary ml-1", onclick= createdest) Create
+      
   script.
     function dispatch(path){
       window.location.href=path

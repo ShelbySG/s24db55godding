@@ -1,40 +1,47 @@
-
+extends layout
+ 
 block content
-  h1= title
-  - let easterBasketid = toShow._id
-  - let easterBasketcolor = toShow.color
-  - let easterBasketcost = toShow.cost
-  - let easterBasketfull = toShow.full
+  h1(id="title")= title
+ 
+  if (toShow == null)
+    h2 No instance to update
+  else
+  - let easterBasketId = toShow._id
+  - let easterBasketColor = toShow.color
+  - let easterBasketFull = toShow.full
+  - let easterBasketCost = toShow.cost
+
   div.row(class='mb-2')
     div.mr-1 ID is
-    div #{easterBasketid}
-    - let actionid = "/resource/easterBasket/" + easterBasketid
-  form(id='CostumeForm', action= actionid, method="PUT")
+    div #{easterBasketId}
+    - let actionid = "/resource/easterBasket/" + easterBasketId
+  form(id='easterBasketForm', action= actionid, method="PUT")
     div.form-group
-      label.easterBasketAttr(for='easterBasketcolor') Easter basket color
-      input#easterBasketcolor(type='text', name='color', value= easterBasketolor )
+      label.easterBasketAttr(for='easterBasketColor') Easter basket color
+      input#easterBasketColor(type='text', name='color', value= easterBasketColor )
     div.form-group
-      label.easterBasketAttr(for='easterBasketfull') Is the Easter basket full ?
-      input#easterBasketfull(type='text', name='full', value= easterBasketfull )
+      label.easterBasketAttr(for='easterBasketFull') Is the Easter basket full ?
+      input#easterBasketFull(type='text', name='full', value= easterBasketFull )
     div.form-group
-      label.easterBasketAttr(for='easterBasketcost') Easter basket cost
-      input#easterBasketcost(type='number', name='cost', value= easterBasketcost )
+      label.easterBasketAttr(for='easterBasketCost') Easter basket cost
+      input#easterBasketCost(type='number', name='cost', value= easterBasketCost )
     input(type="submit")
 
   script.
-    document.forms['CostumeForm'].addEventListener('submit', (event) => {
+    document.forms['easterBasketForm'].addEventListener('submit', (event) => {
       event.preventDefault();
+
       // TODO do something here to show user that form is being submitted
       fetch(event.target.action, {
         method: 'PUT',
         body: new URLSearchParams(new FormData(event.target)) // event.target is the form
       }).then((resp) => {
-        return resp.text(); // or resp.text() or whatever the server sends
+        return resp.json(); // or resp.text() or whatever the server sends
       }).then((body) => {
-        alert("Update succeeded");
-        // TODO handle body
+        alert("Update succeded")
       }).catch((error) => {
         // TODO handle error
-        alert("Update failed " + error);
+        alert("Update failed " + error )
       });
+
     });
